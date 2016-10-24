@@ -52,9 +52,47 @@ gender是性别 字符串 只能是f或者m \n \
 学生选课有考试成绩 如果暂未考试 成绩可以为空 成绩必须在0到100 \n \
 学生之间可以加好友关系 \n \
 ';
-var answer = "not finished yet";
+var answer = 'create table student ( \n\
+id int primary key, \n\
+name text not null, \n\
+gender varchar(1) check(gender = \'f\' or gender = \'m\'), \n\
+); \n\
+ \n\
+create table teacher ( \n\
+id int primary key, \n\
+name text not null, \n\
+gender varchar(1) check(gender = \'f\' or gender = \'m\') \n\
+); \n\
+ \n\
+create table course ( \n\
+id int primary key, \n\
+name text not null \n\
+); \n\
+ \n\
+create table scores ( \n\
+stuid int, \n\
+couid int, \n\
+teaid int, \n\
+score int, \n\
+primary key(stuid, couid), \n\
+foreign key(stuid) references student(id), \n\
+foreign key(couid) references course(id), \n\
+foreign key(teaid) references teacher(id), \n\
+check(score >= 0 and score <= 100) \n\
+); \n\
+ \n\
+create table friends ( \n\
+stu1id int, \n\
+stu2id int, \n\
+primary key(stu1id, stu2id), \n\
+foreign key(stu1id) references student(id), \n\
+foreign key(stu2id) references student(id) \n\
+);';
+
+
 problem = handle(problem);
 problem = problem.replace(new RegExp("\n", "mg"), "<br>")
+answer = answer.replace(new RegExp("\n", "mg"), "<br>")
 $("#title").html(title + "&nbsp;&nbsp;<small>" + subtitle + "</small>");
 $("#problem").html(problem);
 $("#answer").html(answer);

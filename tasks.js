@@ -2,7 +2,7 @@
 {
     name: "finish the practice of SQL",
     etime: "2016-10-24",
-    ftime: false,
+    ftime: true,
     link: "problem1.html"
 },
 {
