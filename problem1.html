@@ -1,0 +1,80 @@
+<html>
+<head>
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome.min.css" rel="stylesheet">
+    <title>rabbit's task</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-2 column">
+        </div>
+        <div class="col-md-8 column">
+            <div class="page-header">
+                <h1 id="title">
+                    Example page header <small>Subtext for header</small>
+                </h1>
+            </div>
+            <p id="problem">
+                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+            </p>
+            <hr>
+            <p>
+                The answer is:
+            </p>
+            <code id="answer">
+                
+            </code>
+        </div>
+        <div class="col-md-2 column">
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script>
+
+var title = "finish the practice of SQL";
+var subtitle = "write creation centences";
+var problem = 
+' \
+<title>数据库练习</title> \n \
+学生有id name gender \n \
+教师有id name gender \n \
+课程有id name \n \
+gender是性别 字符串 只能是f或者m \n \
+学生选课 某个学生选一门课 有对应任课教师 \n \
+学生选课有考试成绩 如果暂未考试 成绩可以为空 成绩必须在0到100 \n \
+学生之间可以加好友关系 \n \
+';
+var answer = "not finished yet";
+problem = handle(problem);
+problem = problem.replace(new RegExp("\n", "mg"), "<br>")
+$("#title").html(title + "&nbsp;&nbsp;<small>" + subtitle + "</small>");
+$("#problem").html(problem);
+$("#answer").html(answer);
+
+function handle(problem) {
+    var ret = "";
+    var strs = problem.split("\n");
+    console.log(strs.length);
+    for(var i = 0; i < strs.length; i++) {
+        console.log(strs[i]);
+        if(strs[i].indexOf("<title>") !== -1) {
+            strs[i] = strs[i].replace(new RegExp("<title>", "mg"), "<h3><b>");
+            strs[i] = strs[i].replace(new RegExp("</title>", "mg"), "</b></h3>");
+        } else {
+            strs[i] = "<h4>" + strs[i] + "</h4>";
+        }
+        ret += strs[i];
+    }
+    console.log(ret);
+    return ret;
+    
+}
+
+</script>

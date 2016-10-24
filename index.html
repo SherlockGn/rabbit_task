@@ -1,0 +1,230 @@
+<html>
+<head>
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome.min.css" rel="stylesheet">
+    <title>rabbit's task</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <ul class="nav nav-tabs" style="margin-bottom: 30px; margin-top: 30px;">
+                <li class="active">
+                     <a href="#">task</a>
+                </li>
+                <li>
+                     <a href="#">determination</a>
+                </li>
+                <li class="disabled">
+                     <a href="#">private messages</a>
+                </li>
+            </ul>
+            <div class="jumbotron well">
+                <h1>Hello, rabbit!</h1>
+                <p>
+                    This is a web page made for you! You are required to check your tasks and finish them every day. Do not be LAZY and neko will always be your friend.
+                </p>
+                <p><a class="btn btn-primary btn-large" href="javascript:today();">today's tasks</a></p>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-7 column">
+                </div>
+                <div class="col-md-4 column">
+                <table class="table table-condensed table-hover">
+                <tbody>
+                <tr>
+                <td style="width: 8%"><i class="fa fa-thumbs-o-down"></i></td>
+                <td style="width: 20%" class="text-danger">undone</td>
+                
+                <td style="width: 10%" class="text-danger" id="undoneText">50%</td>
+                <td>
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar progress-bar-danger" id="undoneWidth" style="width: 100%">
+                        </div>
+                    </div>
+                </td>
+                </tr>
+                <tr>
+                <td style="width: 8%"><i class="fa fa-thumbs-o-up"></i></td>
+                <td style="width: 20%" class="text-success">done</td>
+                
+                <td style="width: 10%" class="text-success" id="doneText">50%</td>
+                <td>
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar progress-bar-success" id="doneWidth" style="width: 100%">
+                        </div>
+                    </div>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                </div>
+                <div class="col-md-1 column">
+                </div>
+            </div>
+            <table class="table table-condensed table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            task id
+                        </th>
+                        <th>
+                            task name
+                        </th>
+                        <th>
+                            estimated completion time
+                        </th>
+                        <th>
+                            completion time
+                        </th>
+                        <th>
+                            today's task
+                        </th>
+                        <th>
+                            status
+                        </th>
+                        <th>
+                            links or remarks
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="taskTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">title</h4>
+            </div>
+            <div class="modal-body" id="myModalBody">test</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+</body>
+</html>
+
+<script src="tasks.js"></script>
+<script>
+
+function show(title, content) {
+    $("#myModalLabel").html(title);
+    $("#myModalBody").html(content);
+    $("#myModal").modal('show');
+}
+
+function getNow() {
+    var d = new Date();
+    var year = d.getFullYear();
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    var s = year + "-" + (month < 10? "0": "") + month + "-" + (day < 10? "0": "") + day;
+    return {
+        year: year,
+        month: month,
+        day: day,
+        str: s
+    };
+}
+
+function taskLineString(id, task) {
+    var lineStyle = null;
+    var status = false;
+    var ftime = "not finish yet";
+    var today = task.etime === getNow().str;
+    if(task.ftime === true) {
+        lineStyle = "success";
+        status = true;
+        ftime = task.etime;
+    }
+    else if(task.ftime === false)
+        lineStyle = "danger";
+    else if(typeof(task.ftime) === 'string') {
+        if(task.etime >= task.ftime)
+            lineStyle = "success";
+        else lineStyle = "warning";
+        status = true;
+        ftime = task.ftime;
+    }
+    var hrefContent = "remark", href = null;
+    if(typeof(task.remark) !== 'undefined') {
+        href = 'javascript:show("remark: (id = '+id+') '+task.name+" on "+task.etime+'", "'+task.remark+'")';
+    } else {
+        href = task.link;
+        hrefContent = "link";
+        target = "target=\'_black\'";
+    }
+    href = href.replace(new RegExp(" ", "mg"), "%20");
+    console.log(href);
+    return '<tr class="'+lineStyle+'"> \
+                <td> \
+                    '+id+' \
+                </td> \
+                <td> \
+                    '+task.name+' \
+                </td> \
+                <td> \
+                    '+task.etime+' \
+                </td> \
+                <td> \
+                    '+ftime+' \
+                </td> \
+                <td> \
+                    '+(today? "yes": "no")+' \
+                </td> \
+                <td> \
+                    '+(status? "done": "udone")+' \
+                </td> \
+                <td><a href=\''+href+'\' '+target+'> \
+                    '+hrefContent+' \
+                <a></td> \
+            </tr>';
+}
+
+function calculate() {
+    var done = 0, undone = 0, num = tasks.length;
+    for(var i = 0; i < tasks.length; i++) {
+        if(tasks[i].ftime === false) undone++;
+        else done++;
+    }
+    var num1 = new Number(undone * 1.0 / num * 100);
+    $("#undoneText").html(num1.toFixed(1) + "%");
+    var num2 = new Number(done * 1.0 / num * 100);
+    $("#doneText").html(num2.toFixed(1) + "%");
+    $("#undoneWidth").css("width", num1 + "%");
+    $("#doneWidth").css("width", num2 + "%");
+}
+
+function today() {
+    var strs = "";
+    for(var i = 0; i < tasks.length; i++) {
+        if(tasks[i].etime === getNow().str) {
+            strs += " (id = "+(i + 1) + ") " + tasks[i].name + " <br>";
+        }
+    }
+    if(strs === "") strs = "no tasks today";
+    show("today's tasks", strs);
+}
+
+$(document).ready(function() {
+    calculate();
+    var tbody = $("#taskTableBody");
+    for(var i = 0; i < tasks.length; i++) {
+        tbody.append(taskLineString(i + 1, tasks[i]));
+    }
+});
+</script>
