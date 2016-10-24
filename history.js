@@ -1,6 +1,6 @@
 var chatting = [
 [
-    't: chatting history in 2016-10-23',
+    't: (book) chatting history in 2016-10-23',
     'n: 别让4年后的自己埋怨4年前的自己碌碌无为',
     'r: 感觉比一起高中第一都厉害好多倍',
     'r: 偶像',
@@ -14,7 +14,7 @@ var chatting = [
     'r: got it'
 ],
 [
-    "t: chatting history in 2016-10-23",
+    "t: (book) chatting history in 2016-10-23",
     'n: 你学任何东西都比高考容易',
     'r: 恩恩',
     'n: 高考能撑下来',
