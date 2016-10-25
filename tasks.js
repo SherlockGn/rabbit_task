@@ -14,8 +14,8 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-10-25",
-    ftime: false,
-    remark: "not finish the task yet"
+    ftime: true,
+    remark: "finished 26 (Remove Duplicates) & 27 (Remove Element)"
 },
 {
     name: "finish 2 problems of Leetcode",
