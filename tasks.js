@@ -8,8 +8,8 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-10-24",
-    ftime: false,
-    remark: "not finish the task yet"
+    ftime: true,
+    remark: "finished 21 (Merge Two Sorted Lists) & 24 (Swap Nodes in Pairs)"
 },
 {
     name: "finish 2 problems of Leetcode",
