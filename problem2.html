@@ -57,7 +57,18 @@ var problem =
 别克 220 3.5 拥有者：无 \n\
 先将存放三辆车的数组转换成json串 \n\
 ';
-var answer = 'not finished yet';
+var answer = '[ \n\
+	{ "car":"bmw", "maxSpeed":200, "weight":3, "owner":[ \n\
+		{ "id":0, "gender":true, "name":"neko", "score":100 }, \n\
+		{ "id":1, "gender":false, "name":"lisa", "score":1000 } \n\
+	] }, \n\
+ \n\
+	{ "car":"Tractor", "maxSpeed":30, "weight":4, "owner":[ \n\
+		{ "id":2, "gender":true, "name":"rabbit", "score":-1 } \n\
+	] }, \n\
+ \n\
+	{ "car":"Buick", "maxSpeed":190, "weight":3.5, "owner":[] } \n\
+]';
 
 
 problem = handle(problem);

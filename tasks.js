@@ -20,7 +20,7 @@
 {
     name: "finish the practice of JSON",
     etime: "2016-10-26",
-    ftime: false,
+    ftime: true,
     link: "problem2.html"
 },
 {
