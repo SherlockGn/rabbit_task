@@ -15,7 +15,13 @@
     name: "finish 2 problems of Leetcode",
     etime: "2016-10-25",
     ftime: true,
-    remark: "finished 26 (Remove Duplicates) & 27 (Remove Element)"
+    remark: "finished 26 (Remove Duplicates),27 (Remove Element) & 28 (Implement strStr())"
+},
+{
+    name: "finish the practice of JSON",
+    etime: "2016-10-26",
+    ftime: false,
+    link: "problem2.html"
 },
 {
     name: "finish 2 problems of Leetcode",
