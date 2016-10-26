@@ -254,7 +254,7 @@ function today() {
 }
 
 function secretInit() {
-    if($.cookie("rabbitpasswd") === null) isOpened = false;
+    if($.cookie("rabbitpasswd") === null || $.cookie("rabbitpasswd") === undefined) isOpened = false;
     else {
         var passwd = $.cookie("rabbitpasswd");
         if(hex_md5(passwd) === correctPassword) {
@@ -266,7 +266,7 @@ function secretInit() {
 
 function secretClick() {
     if(isOpened) {
-        window.location.href = "sceret.html";
+        window.location.href = "secret.html";
     } else {
         show2();
     }
