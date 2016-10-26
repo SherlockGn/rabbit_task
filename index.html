@@ -129,12 +129,13 @@
             <div class="modal-body">
                 The password will be stored in your COOKIE.
                 <div class="form-group">
-                <input class="form-control" id="passwdInput" style="width: 100%;"></input>
+                <a type="button" class="close" aria-hidden="true" style="float: left;" href="javascript: $('#passwdInput').val(''); $('div.form-group').removeClass('has-error');">&times;</a>
+                <input class="form-control" id="passwdInput" ></input>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
-                <button type="button" onclick="javascript:secretPasswordClick();" class="btn btn-primary">OK</button>
+                <button type="button" id="OKbtn" onclick="javascript:secretPasswordClick();" class="btn btn-primary">OK</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
@@ -149,6 +150,7 @@
 // global vars
 var isOpened = false;
 var correctPassword = "414b7e64821a92216befb9689bc6e89a";
+var modalOpened = false;
 
 function show(title, content) {
     $("#myModalLabel").html(title);
@@ -157,6 +159,7 @@ function show(title, content) {
 }
 
 function show2() {
+    $("#myModalInput").modal({backdrop: 'static', keyboard: false});
     $("#myModalInput").modal('show');
 }
 
@@ -277,11 +280,10 @@ function secretPasswordClick() {
     var input = $("#passwdInput").val();
     console.log("input = " + input + ", " + (hex_md5(input) === correctPassword));
     if(hex_md5(input) === correctPassword) {
-        $("#myModalInput").modal('hide');
         $.cookie("rabbitpasswd", input);
         console.log("cookie rabbitpasswd: " + $.cookie("rabbitpasswd"));
         $("div.form-group").addClass("has-success");
-        secretInit();
+        setTimeout(function() {$("#myModalInput").modal('hide'); secretInit(); }, 500);
     } else {
         $("div.form-group").addClass("has-error");
     }
@@ -295,5 +297,16 @@ $(document).ready(function() {
     }
     
     secretInit();
+    $("#myModalInput").on('hide.bs.modal', function() {modalOpened = false; console.log('hide');});
+    $("#myModalInput").on('show.bs.modal', function() {modalOpened = true; console.log('show');});
+    $(document).keydown(function(e) {
+        if(modalOpened === true) {
+            var curKey = e.which;
+            if(curKey == 13){ 
+                $('#OKbtn').click();
+                return false;
+            }
+        }
+    });
 });
 </script>
