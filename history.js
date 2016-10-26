@@ -1,11 +1,11 @@
 var chatting = [
 [
     't: (list-ol) useful websites',
-    'r: <a href="http://fontawesome.io/icons/">icons of font-awesome</a>',
-    'r: <a href="https://leetcode.com/">Leetcode</a>',
-    'r: <a href="https://github.com/SherlockGn">neko\'s github</a>',
-    'r: <a href="http://dict.hjenglish.com/jp/">HJdict (Japanese)</a>',
-    'r: <a href="http://www.liaoxuefeng.com/">lessons of Liao Xuefeng</a>'
+    'r: <a href="http://fontawesome.io/icons/" target="_blank">icons of font-awesome</a>',
+    'r: <a href="https://leetcode.com/" target="_blank">Leetcode</a>',
+    'r: <a href="https://github.com/SherlockGn" target="_blank">neko\'s github</a>',
+    'r: <a href="http://dict.hjenglish.com/jp/" target="_blank">HJdict (Japanese)</a>',
+    'r: <a href="http://www.liaoxuefeng.com/" target="_blank">lessons of Liao Xuefeng</a>'
 ],
 [
     't: (book) chatting history in 2016-10-23',
