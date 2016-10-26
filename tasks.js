@@ -26,8 +26,8 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-10-26",
-    ftime: false,
-    remark: "not finish the task yet"
+    ftime: true,
+    remark: "finished 34 (Search for a Range) & 35 (Search Insert Position)"
 },
 {
     name: "finish 2 problems of Leetcode",
