@@ -3,6 +3,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <script src="jquery.min.js"></script>
     <script src="bootstrap.min.js"></script>
+    <script src="jquery.cookie.js"></script>
+    <script src="md5.js"></script>
     <link href="bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome.min.css" rel="stylesheet">
     <title>rabbit's task</title>
@@ -19,8 +21,8 @@
                 <li>
                      <a href="determination.html">determination</a>
                 </li>
-                <li class="disabled">
-                     <a href="#">private messages</a>
+                <li id="secret" class="disabled">
+                     <a href="javascript:show2();">private messages</a>
                 </li>
             </ul>
             <div class="jumbotron well">
@@ -116,16 +118,46 @@
 </div>
 
 
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModalInput" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Please enter the password</h4>
+            </div>
+            <div class="modal-body">
+                The password will be stored in your COOKIE.
+                <div class="form-group">
+                <input class="form-control" id="passwdInput" style="width: 100%;"></input>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+                <button type="button" onclick="javascript:secretPasswordClick();" class="btn btn-primary">OK</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
 </body>
 </html>
 
 <script src="tasks.js"></script>
 <script>
 
+// global vars
+var isOpened = false;
+var correctPassword = "414b7e64821a92216befb9689bc6e89a";
+
 function show(title, content) {
     $("#myModalLabel").html(title);
     $("#myModalBody").html(content);
     $("#myModal").modal('show');
+}
+
+function show2() {
+    $("#myModalInput").modal('show');
 }
 
 function getNow() {
@@ -221,11 +253,47 @@ function today() {
     show("today's tasks", strs);
 }
 
+function secretInit() {
+    if($.cookie("rabbitpasswd") === null) isOpened = false;
+    else {
+        var passwd = $.cookie("rabbitpasswd");
+        if(passwd === correctPassword) {
+            isOpened = true;
+            $("#secret").removeClass("disabled");
+        }
+    }
+}
+
+function secretClick() {
+    if(isOpened) {
+        window.location.href = "sceret.html";
+    } else {
+        show2();
+    }
+}
+
+function secretPasswordClick() {
+    console.log("ok is clicked");
+    var input = $("#passwdInput").val();
+    console.log("input = " + input + ", " + (hex_md5(input) === correctPassword));
+    if(hex_md5(input) === correctPassword) {
+        $("#myModalInput").modal('hide');
+        $.cookie("rabbitpasswd", correctPassword);
+        console.log("cookie rabbitpasswd: " + $.cookie("rabbitpasswd"));
+        $("div.form-group").removeClass("has-error");
+        secretInit();
+    } else {
+        $("div.form-group").addClass("has-error");
+    }
+}
+
 $(document).ready(function() {
     calculate();
     var tbody = $("#taskTableBody");
     for(var i = 0; i < tasks.length; i++) {
         tbody.append(taskLineString(i + 1, tasks[i]));
     }
+    
+    secretInit();
 });
 </script>
