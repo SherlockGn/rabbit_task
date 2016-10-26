@@ -1,5 +1,13 @@
 var chatting = [
 [
+    't: (list-ol) useful websites',
+    'r: <a href="http://fontawesome.io/icons/">icons of font-awesome</a>',
+    'r: <a href="https://leetcode.com/">Leetcode</a>',
+    'r: <a href="https://github.com/SherlockGn">neko\'s github</a>',
+    'r: <a href="http://dict.hjenglish.com/jp/">HJdict (Japanese)</a>',
+    'r: <a href="http://www.liaoxuefeng.com/">lessons of Liao Xuefeng</a>'
+],
+[
     't: (book) chatting history in 2016-10-23',
     'n: 别让4年后的自己埋怨4年前的自己碌碌无为',
     'r: 感觉比一起高中第一都厉害好多倍',
