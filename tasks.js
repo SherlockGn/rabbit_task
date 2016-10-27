@@ -32,8 +32,8 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-10-27",
-    ftime: false,
-    remark: "not finish the task yet"
+    ftime: true,
+    remark: "finished 58 (Length of Last Word) & 66 (Plus One)"
 },
 {
     name: "finish 2 problems of Leetcode",
