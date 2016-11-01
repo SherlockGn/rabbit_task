@@ -9,6 +9,11 @@
     <link href="font-awesome.min.css" rel="stylesheet">
     <title>rabbit's task</title>
 </head>
+<style>
+.darkgreen {
+    background-color: #9AFF9A;
+}
+</style>
 <body>
 
 <div class="container">
@@ -179,12 +184,12 @@ function getNow() {
 
 function taskLineString(id, task) {
     var lineStyle = null;
-    var status = false;
+    var status = "undone";
     var ftime = "not finish yet";
     var today = task.etime === getNow().str;
     if(task.ftime === true) {
         lineStyle = "success";
-        status = true;
+        status = "done";
         ftime = task.etime;
     }
     else if(task.ftime === false)
@@ -193,8 +198,12 @@ function taskLineString(id, task) {
         if(task.etime >= task.ftime)
             lineStyle = "success";
         else lineStyle = "warning";
-        status = true;
+        status = "unpunctual";
         ftime = task.ftime;
+    } else if(typeof(task.ftime) === "object") {
+        lineStyle = "darkgreen";
+        status = "excess";
+        ftime = task.etime;
     }
     var hrefContent = "remark", href = null;
     if(typeof(task.remark) !== 'undefined') {
@@ -223,7 +232,7 @@ function taskLineString(id, task) {
                     '+(today? "yes": "no")+' \
                 </td> \
                 <td> \
-                    '+(status? "done": "udone")+' \
+                    '+status+' \
                 </td> \
                 <td><a href=\''+href+'\' '+target+'> \
                     '+hrefContent+' \

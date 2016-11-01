@@ -14,7 +14,7 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-10-25",
-    ftime: true,
+    ftime: {},
     remark: "finished 26 (Remove Duplicates), 27 (Remove Element) & 28 (Implement strStr())"
 },
 {
@@ -56,7 +56,7 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-10-31",
-    ftime: true,
+    ftime: {},
     remark: "finished 45 (Jump Game II), 43 (Multiply Strings) & 48 (Rotate Image)"
 },
 {
