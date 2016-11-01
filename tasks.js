@@ -15,7 +15,7 @@
     name: "finish 2 problems of Leetcode",
     etime: "2016-10-25",
     ftime: true,
-    remark: "finished 26 (Remove Duplicates),27 (Remove Element) & 28 (Implement strStr())"
+    remark: "finished 26 (Remove Duplicates), 27 (Remove Element) & 28 (Implement strStr())"
 },
 {
     name: "finish the practice of JSON",
@@ -38,19 +38,61 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-10-28",
-    ftime: false,
-    remark: "not finish the task yet"
+    ftime: true,
+    remark: "finished 67 (Add Binary) & 70 (Climbing Stairs)"
 },
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-10-29",
-    ftime: false,
-    remark: "not finish the task yet"
+    ftime: true,
+    remark: "finished 55 (Jump Game) & 50 (Pow(x, n))"
 },
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-10-30",
+    ftime: true,
+    remark: "finished 46 (Permutations) & 54 (Piral Matrix)"
+},
+{
+    name: "finish 2 problems of Leetcode",
+    etime: "2016-10-31",
+    ftime: true,
+    remark: "finished 45 (Jump Game II), 43 (Multiply Strings) & 48 (Rotate Image)"
+},
+{
+    name: "finish 2 problems of Leetcode",
+    etime: "2016-11-01",
     ftime: false,
-    remark: "not finish the task yet"
+    remark: "not finished yet"
+},
+{
+    name: "finish the practice of JDBC",
+    etime: "2016-11-01",
+    ftime: false,
+    link: "problem3.html"
+},
+{
+    name: "finish 2 problems of Leetcode",
+    etime: "2016-11-02",
+    ftime: false,
+    remark: "not finished yet"
+},
+{
+    name: "finish 2 problems of Leetcode",
+    etime: "2016-11-03",
+    ftime: false,
+    remark: "not finished yet"
+},
+{
+    name: "finish 2 problems of Leetcode",
+    etime: "2016-11-04",
+    ftime: false,
+    remark: "not finished yet"
+},
+{
+    name: "finish 2 problems of Leetcode",
+    etime: "2016-11-05",
+    ftime: false,
+    remark: "not finished yet"
 }
 ];
