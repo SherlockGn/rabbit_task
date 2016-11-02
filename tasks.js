@@ -62,13 +62,13 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-11-01",
-    ftime: false,
-    remark: "not finished yet"
+    ftime: "2016-11-02",
+    remark: "finished 69 (Sqrt(x)) & 59 (Spiral Matrix II)"
 },
 {
     name: "finish the practice of JDBC",
     etime: "2016-11-01",
-    ftime: false,
+    ftime: true,
     link: "problem3.html"
 },
 {

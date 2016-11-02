@@ -54,12 +54,91 @@ var problem =
 将所有学生的成绩减少2分 \n\
 删除某个学生记录 \n\
 ';
-var answer = 'not finished yet';
+var answer = 'package task; \n\
+ \n\
+import java.sql.Connection; \n\
+import java.sql.DriverManager; \n\
+import java.sql.PreparedStatement; \n\
+import java.sql.ResultSet; \n\
+import java.sql.Statement; \n\
+import java.util.ArrayList; \n\
+import java.util.Iterator; \n\
+import java.util.List; \n\
+ \n\
+public class JDBCjdbctest { \n\
+    public static final String URL = "jdbc:mysql://localhost:3306/jdbctest"; \n\
+    public static final String USER = "root"; \n\
+    public static final String PASSWORD = "rabbit"; \n\
+    private static Connection conn; \n\
+    static { \n\
+        try { \n\
+            Class.forName("com.mysql.jdbc.Driver"); \n\
+            conn = DriverManager.getConnection(URL + "?useSSL=false", USER, PASSWORD); \n\
+        } catch (Exception e) { \n\
+            e.printStackTrace(); \n\
+        } \n\
+    } \n\
+ \n\
+    public static void main(String[] args) throws Exception { \n\
+        conn.prepareStatement("delete from student").execute(); \n\
+ \n\
+        // 1.insert students \n\
+        String ist = "insert into student values(?, ?, ?)"; \n\
+        PreparedStatement ps = conn.prepareStatement(ist); \n\
+        ps.setInt(1, 1); \n\
+        ps.setString(2, "neko"); \n\
+        ps.setInt(3, 100); \n\
+        ps.execute(); \n\
+ \n\
+        ps.setInt(1, 2); \n\
+        ps.setString(2, "lisa"); \n\
+        ps.setInt(3, 1000); \n\
+        ps.execute(); \n\
+ \n\
+        ps.setInt(1, 3); \n\
+        ps.setString(2, "rabbit"); \n\
+        ps.setInt(3, -1); \n\
+        ps.execute(); \n\
+ \n\
+        Statement sm = conn.createStatement(); \n\
+        ResultSet rs = sm.executeQuery("select * from student"); \n\
+ \n\
+        // 2.check all students \n\
+        System.out.println("all:"); \n\
+        while (rs.next()) \n\
+            System.out.println(rs.getString("id") + " : " + rs.getString("name") + " -> " + rs.getString("score")); \n\
+ \n\
+        // 3.check students passed \n\
+        System.out.println("\npass:"); \n\
+        rs = sm.executeQuery("select * from student where score>=60"); \n\
+        while (rs.next()) \n\
+            System.out.println(rs.getString("name")); \n\
+        System.out.println(); \n\
+ \n\
+        // 4.update all student\'s score minus 2 \n\
+        String sql = "update student set score=score+2"; \n\
+        conn.prepareStatement(sql).execute(); \n\
+ \n\
+        rs = sm.executeQuery("select * from student"); \n\
+        while (rs.next()) \n\
+            System.out.println(rs.getString("id") + " : " + rs.getString("name") + " -> " + rs.getString("score")); \n\
+        System.out.println(); \n\
+ \n\
+        // 5.delete a student \n\
+        sql = "delete from student where name=\'rabbit\'"; \n\
+        conn.prepareStatement(sql).execute(); \n\
+        rs = sm.executeQuery("select * from student"); \n\
+        while (rs.next()) \n\
+            System.out.println(rs.getString("name")); \n\
+    } \n\
+} \n\
+';
 
 
 problem = handle(problem);
 problem = problem.replace(new RegExp("\n", "mg"), "<br>")
 answer = answer.replace(new RegExp("\n", "mg"), "<br>")
+answer = answer.replace(new RegExp(" ", "mg"), "&nbsp;")
 $("#title").html(title + "&nbsp;&nbsp;<small>" + subtitle + "</small>");
 $("#problem").html(problem);
 $("#answer").html(answer);
