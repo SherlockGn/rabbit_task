@@ -1,0 +1,107 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome.min.css" rel="stylesheet">
+    <title>rabbit's task</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-2 column">
+        </div>
+        <div class="col-md-8 column">
+            <div class="page-header">
+                <h1 id="title">
+                    Example page header <small>Subtext for header</small>
+                </h1>
+            </div>
+            <p id="problem">
+                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+            </p>
+            <hr>
+            <p>
+                The answer is:
+            </p>
+            <code id="answer">
+                
+            </code>
+            <br><br><a href="index.html"> back to home </a>
+        </div>
+        <div class="col-md-2 column">
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script>
+
+var title = "finish the practice of reflection";
+var subtitle = "by JAVA language";
+var problem = 
+' \
+现有一个类 \n\
+class Test { \n\
+    private int intArg; \n\
+    private double doubleArg; \n\
+    private float floatArg; \n\
+    private short shortArg; \n\
+    private long longArg; \n\
+    private char charArg; \n\
+    private boolean booleanArg; \n\
+    private byte byteArg; \n\
+    private String stringArg; \n\
+     \n\
+    private int addOne(int arg1, int arg2) { \n\
+        return intArg + arg1 + arg2 + 1; \n\
+    } \n\
+    // getters & setters \n\
+    // toString method \n\
+    // no arg constructor & all arg constructor \n\
+} \n\
+你需要： \n\
+1. 利用反射获取所有的成员，打印其信息（类型+名称） \n\
+2. 利用no-arg-constructor反射建立对象，并通过反射机制将charArg赋值为\'r\'，将stringArg赋值为"rabbit" \n\
+3. 利用all-arg-constructor反射建立对象，并通过反射机制读取intArg和booleanArg的值 \n\
+4. 在3、4中建立的对象的基础上，通过反射调用其addOne(int, int)方法 \n\
+此外的任务： \n\
+5. 利用反射机制建立一个Math对象 \n\
+6. 利用反射机制将Integer对象的值加1 \n\
+ \n\
+';
+var answer = 'not finished yet';
+
+
+problem = handle(problem);
+problem = problem.replace(new RegExp("\n", "mg"), "<br>")
+problem = problem.replace(new RegExp(" ", "mg"), "&nbsp;")
+answer = answer.replace(new RegExp("\n", "mg"), "<br>")
+answer = answer.replace(new RegExp(" ", "mg"), "&nbsp;")
+$("#title").html(title + "&nbsp;&nbsp;<small>" + subtitle + "</small>");
+$("#problem").html(problem);
+$("#answer").html(answer);
+
+function handle(problem) {
+    var ret = "";
+    var strs = problem.split("\n");
+    console.log(strs.length);
+    for(var i = 0; i < strs.length; i++) {
+        console.log(strs[i]);
+        if(strs[i].indexOf("<title>") !== -1) {
+            strs[i] = strs[i].replace(new RegExp("<title>", "mg"), "<h3><b>");
+            strs[i] = strs[i].replace(new RegExp("</title>", "mg"), "</b></h3>");
+        } else {
+            strs[i] = "<h4>" + strs[i] + "</h4>";
+        }
+        ret += strs[i];
+    }
+    console.log(ret);
+    return ret;
+    
+}
+
+</script>

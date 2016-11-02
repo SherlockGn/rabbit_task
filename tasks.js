@@ -90,6 +90,12 @@
     remark: "not finished yet"
 },
 {
+    name: "finish the practice of reflection",
+    etime: "2016-11-04",
+    ftime: false,
+    link: "problem4.html"
+},
+{
     name: "finish 2 problems of Leetcode",
     etime: "2016-11-05",
     ftime: false,
