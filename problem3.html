@@ -109,7 +109,7 @@ public class JDBCjdbctest { \n\
             System.out.println(rs.getString("id") + " : " + rs.getString("name") + " -> " + rs.getString("score")); \n\
  \n\
         // 3.check students passed \n\
-        System.out.println("\npass:"); \n\
+        System.out.println("\\npass:"); \n\
         rs = sm.executeQuery("select * from student where score>=60"); \n\
         while (rs.next()) \n\
             System.out.println(rs.getString("name")); \n\
