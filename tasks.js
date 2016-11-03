@@ -62,7 +62,7 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-11-01",
-    ftime: "2016-11-02",
+    ftime: true,
     remark: "finished 69 (Sqrt(x)) & 59 (Spiral Matrix II)"
 },
 {
@@ -74,8 +74,8 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-11-02",
-    ftime: false,
-    remark: "not finished yet"
+    ftime: {},
+    remark: "finished 39 (Combination Sum), 74 (Search a 2D Matrix) & 75 (Sort Colors)"
 },
 {
     name: "finish 2 problems of Leetcode",
