@@ -84,8 +84,20 @@
     remark: "not finished yet"
 },
 {
+    name: "finish the practice of binary search",
+    etime: "2016-11-03",
+    ftime: false,
+    link: "problem5.html"
+},
+{
     name: "finish 2 problems of Leetcode",
     etime: "2016-11-04",
+    ftime: false,
+    remark: "not finished yet"
+},
+{
+    name: "finish 2 problems of Leetcode",
+    etime: "2016-11-05",
     ftime: false,
     remark: "not finished yet"
 },
@@ -94,11 +106,5 @@
     etime: "2016-11-04",
     ftime: false,
     link: "problem4.html"
-},
-{
-    name: "finish 2 problems of Leetcode",
-    etime: "2016-11-05",
-    ftime: false,
-    remark: "not finished yet"
 }
 ];
