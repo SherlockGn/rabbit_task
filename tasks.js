@@ -80,8 +80,8 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-11-03",
-    ftime: false,
-    remark: "not finished yet"
+    ftime: true,
+    remark: "finished 22 (Generate Parentheses), 234 (Generate Parentheses)"
 },
 {
     name: "finish the practice of binary search",
@@ -103,7 +103,7 @@
 },
 {
     name: "finish the practice of reflection",
-    etime: "2016-11-04",
+    etime: "2016-11-05",
     ftime: false,
     link: "problem4.html"
 }
