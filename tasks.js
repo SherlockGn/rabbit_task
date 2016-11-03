@@ -86,7 +86,7 @@
 {
     name: "finish the practice of binary search",
     etime: "2016-11-03",
-    ftime: false,
+    ftime: true,
     link: "problem5.html"
 },
 {
