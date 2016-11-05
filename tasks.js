@@ -81,7 +81,7 @@
     name: "finish 2 problems of Leetcode",
     etime: "2016-11-03",
     ftime: true,
-    remark: "finished 22 (Generate Parentheses), 234 (Generate Parentheses)"
+    remark: "finished 22 (Generate Parentheses) & 234 (Generate Parentheses)"
 },
 {
     name: "finish the practice of binary search",
@@ -92,8 +92,8 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-11-04",
-    ftime: false,
-    remark: "not finished yet"
+    ftime: {},
+    remark: "finished 42 (Trapping Rain Water) & 77 (Combinations) & 78 (Subsets)"
 },
 {
     name: "finish 2 problems of Leetcode",
@@ -106,5 +106,35 @@
     etime: "2016-11-05",
     ftime: false,
     link: "problem4.html"
+},
+{
+    name: "finish 2 problems of Leetcode",
+    etime: "2016-11-06",
+    ftime: false,
+    remark: "not finished yet"
+},
+{
+    name: "finish 2 problems of Leetcode",
+    etime: "2016-11-07",
+    ftime: false,
+    remark: "not finished yet"
+},
+{
+    name: "finish 2 problems of Leetcode",
+    etime: "2016-11-08",
+    ftime: false,
+    remark: "not finished yet"
+},
+{
+    name: "finish 2 problems of Leetcode",
+    etime: "2016-11-09",
+    ftime: false,
+    remark: "not finished yet"
+},
+{
+    name: "finish 2 problems of Leetcode",
+    etime: "2016-11-10",
+    ftime: false,
+    remark: "not finished yet"
 }
 ];
