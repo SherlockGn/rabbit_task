@@ -110,8 +110,8 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-11-06",
-    ftime: false,
-    remark: "not finished yet"
+    ftime: {},
+    remark: "finished 51 (N-Queens), 52 (N-Queens II) & 83 (Remove Duplicates from Sorted List)"
 },
 {
     name: "finish 2 problems of Leetcode",
