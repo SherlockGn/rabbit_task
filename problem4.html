@@ -73,7 +73,127 @@ class Test { \n\
 6. 利用反射机制将Integer对象的值加1 \n\
  \n\
 ';
-var answer = 'not finished yet';
+var answer = ' \n\
+package task_from_neko; \n\
+ \n\
+import java.lang.reflect.Constructor; \n\
+import java.lang.reflect.Field; \n\
+import java.lang.reflect.Method; \n\
+import java.lang.reflect.Modifier; \n\
+import java.lang.reflect.Parameter; \n\
+ \n\
+public class Reflection { \n\
+    public static void main(String[] args) throws Exception { \n\
+        Class<\?> cls = Class.forName("task_from_neko.Test"); \n\
+         \n\
+        System.out.println("getAllAttribute():"); \n\
+        getAllAttribute(cls); \n\
+        System.out.println("\\nfieldAndMethod:"); \n\
+        fieldAndMethod(cls); \n\
+         \n\
+        System.out.println("\\nintegerModifier():"); \n\
+        Integer val = 99; \n\
+        System.out.println("before val = " + val); \n\
+        integerModifier(val);                        // constant pool \n\
+        System.out.println("after  val = " + val); \n\
+         \n\
+        System.out.println("\\nmathInstance():"); \n\
+        mathInstance(); \n\
+         \n\
+        System.out.println("\\ngetAndSet():"); \n\
+        getAndSet(cls); \n\
+    } \n\
+     \n\
+    public static void getAllAttribute(Class<\?> cls) { \n\
+        Field[] fields = cls.getDeclaredFields(); \n\
+        System.out.println("fields:"); \n\
+        for (Field f: fields) \n\
+            System.out.println(Modifier.toString(f.getModifiers()) +  \n\
+                    " " + f.getName()); \n\
+         \n\
+        Method[] methods = cls.getDeclaredMethods(); \n\
+        Parameter[] parameters; \n\
+        System.out.println("\\nmethods:"); \n\
+        for (Method m: methods) { \n\
+            System.out.print(Modifier.toString(m.getModifiers()) + \n\
+                    " " + m.getName() + \'(\'); \n\
+            parameters = m.getParameters(); \n\
+            StringBuilder buf = new StringBuilder(); \n\
+            for (Parameter p: parameters) \n\
+                buf.append(p.getType().getSimpleName() + " " + p.getName() + ", "); \n\
+            if (buf.length() > 0) \n\
+                System.out.print(buf.substring(0, buf.length() - 2)); \n\
+            System.out.println(\')\'); \n\
+        } \n\
+         \n\
+    } \n\
+     \n\
+    public static void fieldAndMethod(Class<\?> cls) throws Exception { \n\
+        Test test = (Test) cls.newInstance(); \n\
+        System.out.println(test.toString()); \n\
+        Constructor<\?> constructor = cls.getDeclaredConstructor(int.class, String.class); \n\
+        test = (Test) constructor.newInstance(23, "neko"); \n\
+        System.out.println(test.toString()); \n\
+         \n\
+        Field field = cls.getDeclaredField("stringArg"); \n\
+        field.setAccessible(true); \n\
+        System.out.println(field.get(test)); \n\
+        field.set(test, "rabbit"); \n\
+         \n\
+        field = cls.getDeclaredField("intArg"); \n\
+        field.setAccessible(true); \n\
+        System.out.println(field.getInt(test)); \n\
+        field.set(test, 19); \n\
+         \n\
+        System.out.println(test.toString()); \n\
+         \n\
+         \n\
+        Method method = cls.getDeclaredMethod("addOne", int.class, int.class); \n\
+        method.setAccessible(true); \n\
+        System.out.println(Modifier.toString(method.getModifiers())); \n\
+        System.out.println("invoke() : " + method.invoke(test, 2, 5)); \n\
+    } \n\
+     \n\
+    public static void integerModifier(Integer val) throws Exception { \n\
+        Class<\?> cls = Integer.class; \n\
+        Field field = cls.getDeclaredField("value"); \n\
+        field.setAccessible(true); \n\
+        field.set(val, val + 1); \n\
+    } \n\
+     \n\
+    public static void mathInstance() throws Exception { \n\
+        Class<\?> mathClass = Math.class; \n\
+        System.out.println(Modifier.toString(mathClass.getModifiers())); \n\
+        Constructor<\?> constructor = mathClass.getDeclaredConstructor(); \n\
+        constructor.setAccessible(true); \n\
+        Math math = (Math) constructor.newInstance(); \n\
+        System.out.println(math); \n\
+    } \n\
+     \n\
+    public static void getAndSet(Class<\?> cls) throws Exception { \n\
+        Test test = (Test)  cls.newInstance(); \n\
+        Field field = cls.getDeclaredField("charArg"); \n\
+        field.setAccessible(true); \n\
+        field.set(test, \'r\'); \n\
+        System.out.println(field.getChar(test)); \n\
+         \n\
+        field = cls.getDeclaredField("stringArg"); \n\
+        field.setAccessible(true); \n\
+        field.set(test, "rabbit"); \n\
+        System.out.println(field.get(test)); \n\
+         \n\
+        Constructor<\?> constructor = cls.getDeclaredConstructor(int.class, String.class); \n\
+        test = (Test) constructor.newInstance(99, "neko");    // collision to the 21 line \n\
+        field = cls.getDeclaredField("intArg"); \n\
+        field.setAccessible(true); \n\
+        System.out.println(field.getInt(test)); \n\
+        field = cls.getDeclaredField("booleanArg"); \n\
+        field.setAccessible(true); \n\
+        System.out.println(field.getBoolean(test)); \n\
+    } \n\
+} \n\
+ \n\
+';
 
 
 problem = handle(problem);

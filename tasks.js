@@ -98,13 +98,13 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-11-05",
-    ftime: false,
-    remark: "not finished yet"
+    ftime: {},
+    remark: "finished 88 (Merge Sorted Array), 100 (Same Tree) & 73 (Set Matrix Zeroes)"
 },
 {
-    name: "finish the practice of reflection",
+    name: "finish the practice of reflection {star}",
     etime: "2016-11-05",
-    ftime: false,
+    ftime: {},
     link: "problem4.html"
 },
 {

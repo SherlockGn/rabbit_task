@@ -211,6 +211,8 @@ function taskLineString(id, task) {
     var status = "undone";
     var ftime = "not finish yet";
     var today = task.etime === getNow().str;
+    task.name = task.name.replace('{', '&nbsp;<i class="fa fa-');
+    task.name = task.name.replace('}', '"></i>');
     if(task.ftime === true) {
         lineStyle = "success";
         status = "done";
