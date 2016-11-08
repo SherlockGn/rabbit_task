@@ -116,8 +116,8 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-11-07",
-    ftime: false,
-    remark: "not finished yet"
+    ftime: true,
+    remark: "finished 80 (Remove Duplicates from Sorted Array II) & 82 (Remove Duplicates from Sorted List II)"
 },
 {
     name: "finish 2 problems of Leetcode",
