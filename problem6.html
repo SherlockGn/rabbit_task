@@ -47,14 +47,14 @@ var problem =
 完成SQLManager和Table类的部分编写，包括 \n\
 class SQLManager { \n\
     void loginDatabase(String url, String userName, String password, String dbName); \n\
-    Table createTable(Class<\?> cls, String primaryKeyName); \n\
-    Table createTable(Class<\?> cls, String[] primaryKeyName); \n\
-    Table createTable(Class<\?> cls, String... primaryKeyName); \n\
+    Table createTable(Class<\?> cls, String tableName, String primaryKeyName); \n\
+    Table createTable(Class<\?> cls, String tableName, String[] primaryKeyName); \n\
+    Table createTable(Class<\?> cls, String tableName, String... primaryKeyName); \n\
 } \n\
 其中如果未登录则进行创建表操作，则会抛出异常，登录信息不正确或者未引入JDBC的jar包也会抛出异常 \n\
-用户调用createTable方法，则会在相应的数据库中创建一张表，cls对象对应的类属性如果不满足以下条件，也会抛出Runtime异常： \n\
+用户调用createTable方法，则会在相应的数据库中创建一张表，列分别对应着cls对象对应的类的各个非static属性，如果该类不满足以下条件，也会抛出Runtime异常： \n\
 1. 不为基本数据类型 \n\
-2. 其类型只能为byte, short, int, long, float, double, char, boolean, Byte, Short, Integer, Long, Float, Double, Character, Boolean, String中的一种； \n\
+2. 其类型只能为byte, short, int, long, float, double, char, boolean, Byte, \nShort, Integer, Long, Float, Double, Character, Boolean, String中的一种； \n\
 3. 有空参构造器； \n\
 如果类中不含名为primaryKeyName的对象，亦抛出异常。 \n\
 最好提供setter、getter方法，没有提供亦可。 \n\
