@@ -136,5 +136,23 @@
     etime: "2016-11-10",
     ftime: false,
     remark: "not finished yet"
+},
+{
+    name: "finish 2 problems of Leetcode",
+    etime: "2016-11-11",
+    ftime: false,
+    remark: "not finished yet"
+},
+{
+    name: "finish 2 problems of Leetcode",
+    etime: "2016-11-12",
+    ftime: false,
+    remark: "not finished yet"
+},
+{
+    name: "realize ORM (1) {diamond}",
+    etime: "2016-11-12",
+    ftime: false,
+    link: "problem6.html"
 }
 ];
