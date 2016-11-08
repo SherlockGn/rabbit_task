@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>A jQuery Countdown Timer | Tutorialzine Demo</title>
+        <!-- Our CSS stylesheet file -->
+        <link rel="stylesheet" href="assets/css/styles.css" />
+        <link rel="stylesheet" href="assets/countdown/jquery.countdown.css" />
+        <style>
+        .countdownclass {
+            margin-top: 20px;
+            width: 100%;
+        }
+        </style>
+        <!--[if lt IE 9]>
+          <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    
+    <body>
+        <div class="messageclass">小马哥</div>
+        <div id="countdown1" class='countdownclass' style="display: none"></div>
+        <p id="note1" class='nodeclass'></p>
+
+        <div class="messageclass">王涛</div>
+        <div id="countdown2" class='countdownclass' style="display: none"></div>
+        <p id="note2" class='nodeclass'></p>
+        
+        <div class="messageclass">刘礼明</div>
+        <div id="countdown3" class='countdownclass' style="display: none"></div>
+        <p id="note3" class='nodeclass'></p>
+        
+        <div class="messageclass">陈欢</div>
+        <div id="countdown4" class='countdownclass' style="display: none"></div>
+        <p id="note4" class='nodeclass'></p>
+        
+        <!-- JavaScript includes -->
+        <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="assets/countdown/jquery.countdown.js"></script>
+        <script src="assets/js/script.js"></script>
+
+    </body>
+</html>
+<script>
+$(function() {
+    run('countdown1', 'note1', 2021, 7, 1);
+    run('countdown2', 'note2', 2018, 7, 1);
+    run('countdown3', 'note3', 2019, 7, 1);
+    run('countdown4', 'note4', 2020, 7, 1);
+});
+</script>
