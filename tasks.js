@@ -122,8 +122,8 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-11-08",
-    ftime: false,
-    remark: "not finished yet"
+    ftime: {},
+    remark: "finished 101 (Symmetric Tree) & 102 (Binary Tree Level Order Traversal) & 103 (Binary Tree Zigzag Level Order Traversal)"
 },
 {
     name: "finish 2 problems of Leetcode",
