@@ -128,8 +128,8 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-11-09",
-    ftime: false,
-    remark: "not finished yet"
+    ftime: true,
+    remark: "finished 104 (Maximum Depth of Binary Tree) & 107 (Binary Tree Level Order Traversal II)"
 },
 {
     name: "finish 2 problems of Leetcode",
