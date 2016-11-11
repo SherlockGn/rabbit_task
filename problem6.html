@@ -71,7 +71,257 @@ boolean(Boolean) -> tinyint \n\
 String -> 主键为varchar(255)，非主键为text \n\
 注：返回的Table对象用于插删改查，本次练习中返回null即可。 \n\
 ';
-var answer = 'not finished yet';
+var answer = ' \n\
+package org.ssp.rabbit.sqlorm; \n\
+ \n\
+import java.lang.reflect.Field; \n\
+import java.lang.reflect.Modifier; \n\
+import java.sql.Connection; \n\
+import java.sql.DriverManager; \n\
+import java.sql.ResultSet; \n\
+import java.sql.SQLException; \n\
+import java.util.ArrayList; \n\
+import java.util.Arrays; \n\
+import java.util.List; \n\
+ \n\
+public class SQLManager { \n\
+    private Connection connection = null; \n\
+    private String dbName = null; \n\
+ \n\
+    public SQLManager() { \n\
+        try { \n\
+            Class.forName("com.mysql.jdbc.Driver"); \n\
+        } catch (Exception e) { \n\
+            throw new RuntimeException("can not find sql\'s driver: " + e.getMessage()); \n\
+        } \n\
+    } \n\
+    public SQLManager(String userName, String password, String dbName) { \n\
+        loginDatabase(userName, password, dbName); \n\
+    } \n\
+    public SQLManager(String url, String userName, String password, String dbName) { \n\
+        loginDatabase(url, userName, password, dbName); \n\
+    } \n\
+     \n\
+    public void loginDatabase(String url, String userName, String password, String dbName) { \n\
+        try { \n\
+            Class.forName("com.mysql.jdbc.Driver"); \n\
+        } catch (ClassNotFoundException e) { \n\
+            throw new RuntimeException("can not find sql\'s driver: " + e.getMessage()); \n\
+        } \n\
+        StringBuilder buf = new StringBuilder(); \n\
+        if (url == null) \n\
+            buf.append("URL is null, "); \n\
+        if (userName == null) \n\
+            buf.append("user name is null, "); \n\
+        if (password == null) \n\
+            buf.append("password is null, "); \n\
+        if (buf.length() > 0) \n\
+            throw new RuntimeException(buf.substring(0, buf.length() - 2)); \n\
+        try { \n\
+            connection = DriverManager.getConnection(url, userName, password); \n\
+        } catch (Exception e) { \n\
+            throw new RuntimeException("can not login to databases: " + e.getMessage()); \n\
+        } \n\
+        if (dbName != null) { \n\
+            try { \n\
+                connection.prepareStatement("use " + dbName).execute(); \n\
+            } catch (Exception e) { \n\
+                throw new RuntimeException("can not use " + dbName + ": " + e.getMessage()); \n\
+            } \n\
+            this.dbName = dbName; \n\
+        } \n\
+    } \n\
+    public void loginDatabase(String userName, String password, String dbName) { \n\
+        loginDatabase("jdbc:mysql://localhost:3306?useSSL=false", userName, password, dbName); \n\
+    } \n\
+ \n\
+    public void createDatabase(String dbName) { \n\
+        if (connection == null) \n\
+            throw new RuntimeException("haven\'t connected to databases"); \n\
+        if (dbName == null) \n\
+            throw new RuntimeException("database name is null"); \n\
+        try { \n\
+            connection.prepareStatement("create database " + dbName).execute(); \n\
+        } catch (Exception e) { \n\
+            throw new RuntimeException("can not create database " + dbName + ": " + e.getMessage()); \n\
+        } \n\
+    } \n\
+     \n\
+    public void useDatabase(String dbName) { \n\
+        if (connection == null) \n\
+            throw new RuntimeException("haven\'t connected to databases"); \n\
+        if (dbName == null) \n\
+            throw new RuntimeException("database name is null"); \n\
+        try { \n\
+            connection.prepareStatement("use database " + dbName).execute(); \n\
+        } catch (Exception e) { \n\
+            throw new RuntimeException("can not use database " + dbName + ": " + e.getMessage()); \n\
+        } \n\
+        this.dbName = dbName; \n\
+    } \n\
+ \n\
+    public void dropDatabase(String dbName) { \n\
+        if (connection == null) \n\
+            throw new RuntimeException("haven\'t connected to databases"); \n\
+        try { \n\
+            connection.prepareStatement("drop " + dbName).execute(); \n\
+        } catch (Exception e) { \n\
+            throw new RuntimeException("can not drop database " + dbName + ": " + e.getMessage()); \n\
+        } \n\
+    } \n\
+     \n\
+    public String getDatabase() { \n\
+        return dbName; \n\
+    } \n\
+     \n\
+    public List<String> showDatabases() { \n\
+        if (connection == null) \n\
+            throw new RuntimeException("haven\'t connected to databases"); \n\
+        ResultSet resultSet; \n\
+        try { \n\
+            resultSet = connection.prepareStatement("show databases").executeQuery(); \n\
+        } catch (Exception e) { \n\
+            throw new RuntimeException("result set error: " + e.getMessage()); \n\
+        } \n\
+        if (resultSet == null) \n\
+            throw new RuntimeException("can not get ResultSet"); \n\
+        List<String> res = new ArrayList<>(); \n\
+        try { \n\
+            while (resultSet.next()) \n\
+                res.add(resultSet.getString("database")); \n\
+        } catch (Exception e) { \n\
+            throw new RuntimeException("result set error: " + e.getMessage()); \n\
+        } \n\
+        return res; \n\
+    } \n\
+     \n\
+    private String typeSelector(String type, boolean isPrimary) { \n\
+        if (type.equals("int") || type.equals("Integer")) \n\
+            return "int(4)"; \n\
+        if (type.equals("char") || type.equals("Character")) \n\
+            return "char(1)"; \n\
+        if (type.equals("String")) \n\
+            return isPrimary? "varchar(255)": "text"; \n\
+         \n\
+        if (Character.isUpperCase(type.charAt(0))) \n\
+            type = Character.toLowerCase(type.charAt(0)) + type.substring(1); \n\
+ \n\
+        if (type.equals("byte")) \n\
+            return "int(1)"; \n\
+        if (type.equals("short")) \n\
+            return "int(2)"; \n\
+        if (type.equals("long")) \n\
+            return "int(8)"; \n\
+        if (type.equals("float")) \n\
+            return "float"; \n\
+        if (type.equals("double")) \n\
+            return "double"; \n\
+        if (type.equals("boolean")) \n\
+            return "tinyint"; \n\
+        return null; \n\
+    } \n\
+     \n\
+    public Table createTable(Class<\?> cls, String tableName, String...primaryKeyName) { \n\
+        if (connection == null) \n\
+            throw new RuntimeException("haven\'t connected to databases"); \n\
+        if (dbName == null) \n\
+            throw new RuntimeException("have not used any database"); \n\
+        StringBuilder buf = new StringBuilder(); \n\
+        if (cls == null) \n\
+            buf.append("Class<\?> is null, "); \n\
+        if (tableName == null) \n\
+            buf.append("table name is null, "); \n\
+        if (buf.length() > 0) \n\
+            throw new RuntimeException(buf.substring(0, buf.length() - 2)); \n\
+         \n\
+        if (Arrays.asList(new String[] {"byte", "char", "short", "int", "long", "float", "double", "boolean"}).contains(cls.getSimpleName())) \n\
+            throw new RuntimeException("Class<\?> is illegal"); \n\
+         \n\
+        try { \n\
+            cls.newInstance(); \n\
+        } catch (Exception e) { \n\
+            throw new RuntimeException("lack of no-argument constructor: " + e.getMessage()); \n\
+        } \n\
+         \n\
+        Field[] fields = cls.getDeclaredFields(); \n\
+         \n\
+        List<String> elements = new ArrayList<>(); \n\
+        int keyCounter = 0; \n\
+        for (Field f: fields) { \n\
+            if (! Modifier.isStatic(f.getModifiers()) && ! Modifier.isTransient(f.getModifiers())) { \n\
+                boolean isPrimary = false; \n\
+                if (Arrays.asList(primaryKeyName).contains(f.getName())) { \n\
+                    isPrimary = true; \n\
+                    keyCounter++; \n\
+                } \n\
+                 \n\
+                String type = typeSelector(f.getType().getSimpleName(), isPrimary); \n\
+                if (type != null) \n\
+                    elements.add(f.getName() + " " + type + ","); \n\
+                else \n\
+                    throw new RuntimeException( \n\
+                            "argument\'s type is illegal : " + f.getType().getSimpleName() + " " + f.getName()); \n\
+            } \n\
+        } \n\
+        if (keyCounter != primaryKeyName.length) \n\
+            throw new RuntimeException("primary key error"); \n\
+         \n\
+        buf.append("create table " + tableName + "("); \n\
+        for (String s: elements) \n\
+            buf.append(s); \n\
+        if (primaryKeyName.length > 0) { \n\
+            buf.append("primary key("); \n\
+            for (String s: primaryKeyName) \n\
+                buf.append(s + ","); \n\
+            buf.setCharAt(buf.length() - 1, \')\'); \n\
+            buf.append(\')\'); \n\
+        } else \n\
+            buf.setCharAt(buf.length() - 1, \')\'); \n\
+        try { \n\
+            connection.prepareStatement(buf.toString()).execute(); \n\
+        } catch (Exception e) { \n\
+            throw new RuntimeException("can not create table: " + e.getMessage()); \n\
+        } \n\
+        return null; \n\
+    } \n\
+     \n\
+    public void dropTable(String tableName) { \n\
+        if (connection == null) \n\
+            throw new RuntimeException("haven\'t connected to databases"); \n\
+        if (dbName == null) \n\
+            throw new RuntimeException("have not used any database"); \n\
+        try { \n\
+            connection.prepareStatement("drop table " + tableName).execute(); \n\
+        } catch (SQLException e) { \n\
+            throw new RuntimeException("drop table error: " + e.getMessage()); \n\
+        } \n\
+    } \n\
+     \n\
+    public List<String> showTables() { \n\
+        if (connection == null) \n\
+            throw new RuntimeException("haven\'t connected to databases"); \n\
+        List<String> res = new ArrayList<>(); \n\
+        try { \n\
+            ResultSet resultSet = connection.prepareStatement("show tables").executeQuery(); \n\
+            if (resultSet == null) \n\
+                throw new RuntimeException("can not get ResultSet"); \n\
+            while (resultSet.next()) \n\
+                res.add(resultSet.getString(1)); \n\
+        } catch (SQLException e) { \n\
+            throw new RuntimeException("result set error"); \n\
+        } \n\
+        return res; \n\
+    } \n\
+     \n\
+    public static void main(String[] args) { \n\
+        SQLManager sm = new SQLManager("root", "123456", "foodshare"); \n\
+        sm.createTable(Student.class, "rabbit", "id"); \n\
+        System.out.println(sm.showDatabases()); \n\
+        System.out.println(sm.showTables()); \n\
+    } \n\
+} \n\
+ \n\
+';
 
 
 problem = handle(problem);

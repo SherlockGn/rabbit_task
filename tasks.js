@@ -152,7 +152,7 @@
 {
     name: "realize ORM (1) {diamond}",
     etime: "2016-11-12",
-    ftime: false,
+    ftime: 2,
     link: "problem6.html"
 }
 ];

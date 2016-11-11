@@ -230,6 +230,10 @@ function taskLineString(id, task) {
         lineStyle = "colorful";
         status = "excess";
         ftime = task.etime;
+    } else if(typeof(task.ftime) === "number") {
+        lineStyle = "colorful";
+        status = "excess &times; " + task.ftime;
+        ftime = task.etime;
     }
     var hrefContent = "remark", href = null;
     if(typeof(task.remark) !== 'undefined') {
@@ -273,6 +277,8 @@ function calculate() {
         else done++;
         if(typeof(tasks[i].ftime) == 'object')
             excess++;
+        if(typeof(tasks[i].ftime) == 'number')
+            excess += tasks[i].ftime;
     }
     var num1 = new Number(undone * 1.0 / num * 100);
     $("#undoneText").html(num1.toFixed(1) + "%");
