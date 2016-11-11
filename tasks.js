@@ -134,8 +134,8 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-11-10",
-    ftime: false,
-    remark: "not finished yet"
+    ftime: {},
+    remark: "finished 144 (Binary Tree Preorder Traversal), 145 (Binary Tree Postorder Traversal) & 199 (Binary Tree Right Side View)"
 },
 {
     name: "finish 2 problems of Leetcode",
