@@ -140,8 +140,8 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-11-11",
-    ftime: false,
-    remark: "not finished yet"
+    ftime: {},
+    remark: "finished 147 (Insertion Sort List), 141(Linked List Cycle) & 160 (Intersection of Two Linked Lists)"
 },
 {
     name: "finish 2 problems of Leetcode",
