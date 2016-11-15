@@ -1,0 +1,97 @@
+<html>
+<head>
+	<script src="jquery.min.js"></script>
+</head>
+<body style="background: url(bg.jpg);">
+</body>
+</html>
+
+<script>
+
+var ampx = 300, ampy = 200, step = 20;
+var imgSize = 25;
+var picNumber = 7;
+var body = $("body");
+var width = document.body.clientWidth;
+var height = document.body.clientHeight;
+
+var generateInvisibleImg = function(x, y) {
+	var random = parseInt(Math.random() * picNumber) + 1;
+	console.log(random);
+	var imgstr = '<img src="f'+random+'.png" style="opacity: 0; width:'+imgSize+'px; position: absolute; margin-left: '+x+'; margin-top: '+y+'"></img>';
+	return $(imgstr);
+}
+
+var appendBody = function(x, y, showTime) {
+	var img = generateInvisibleImg(x, y);
+	body.append(img);
+	img.animate({opacity: 1}, showTime);
+}
+
+var f = function(x) {
+	x /= ampx;
+	return ampy * (Math.sqrt(1 - x * x) + Math.pow(x * x, 1/3));
+}
+
+var g = function(x) {
+	x /= ampx;
+	return ampy * (-Math.sqrt(1 - x * x) + Math.pow(x * x, 1/3));
+}
+
+var generateDrawArray = function() {
+	var results = new Array();
+	var x;
+	for(x = 0; x < ampx; x += step)
+		results.push({x: x, y: f(x)});
+	for(x = ampx; x > 0; x -= step)
+		results.push({x: x, y: g(x)});
+	for(x = 0; x > -ampx; x -= step)
+		results.push({x: x, y: g(x)});
+	for(x = -ampx; x < 0; x += step)
+		results.push({x: x, y: f(x)});
+	// add 4 elements
+	var indexAmp1, indexAmp2;
+	for(var i = 0; i < results.length; i++) {
+		if(results[i].x === ampx) indexAmp1 = i;
+		if(results[i].x === -ampx) indexAmp2 = i;
+	}
+	results.splice(indexAmp1 - 1, 0, {x: ampx - step * 3 / 10, y: f(ampx - step * 3 / 10)});
+	indexAmp1++;
+	indexAmp2++;
+	results.splice(indexAmp1, 0, {x: ampx - step * 3 / 10, y: g(ampx - step * 3 / 10)});
+	indexAmp2++;
+	results.splice(indexAmp2 - 1, 0, {x: -ampx + step * 3 / 10, y: g(-ampx + step * 3 / 10)});
+	indexAmp2++;
+	results.splice(indexAmp2, 0, {x: -ampx + step * 3 / 10, y: f(-ampx + step * 3 / 10)});
+	// end of add
+	for(var i = 0; i < results.length; i++) {
+		results[i].x += width / 2;
+		results[i].y += height / 2;
+		results[i].y = height - results[i].y;
+	}
+	return results;
+} 
+
+
+var privateRecursion = function(results, index) {
+	var showTime = 1000, nextTime = 50;
+	if(index < results.length) {
+		// show pic
+		appendBody(results[index].x, results[index].y);
+		setTimeout(function() {
+			privateRecursion(results, index + 1);
+		}, nextTime);
+	}
+}
+var animateAppend = function(results) {
+	privateRecursion(results, 0);
+}
+
+var arr = generateDrawArray();
+animateAppend(arr);
+</script>
+
+
+
+
+

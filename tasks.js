@@ -146,8 +146,8 @@
 {
     name: "finish 2 problems of Leetcode",
     etime: "2016-11-12",
-    ftime: false,
-    remark: "not finished yet"
+    ftime: true,
+    remark: "finished 110 (Balanced Binary Tree) & 111 (Minimum Depth of Binary Tree)"
 },
 {
     name: "realize ORM (1) {diamond}",
