@@ -1,6 +1,13 @@
 <html>
 <head>
 	<script src="jquery.min.js"></script>
+	<script src="typed.js"></script>
+<style>
+	.bgGreen {
+		color: green;
+	}
+
+</style>
 </head>
 <body style="background: url(bg.jpg);">
 </body>
@@ -17,7 +24,6 @@ var height = document.body.clientHeight;
 
 var generateInvisibleImg = function(x, y) {
 	var random = parseInt(Math.random() * picNumber) + 1;
-	console.log(random);
 	var imgstr = '<img src="f'+random+'.png" style="opacity: 0; width:'+imgSize+'px; position: absolute; margin-left: '+x+'; margin-top: '+y+'"></img>';
 	return $(imgstr);
 }
@@ -65,9 +71,9 @@ var generateDrawArray = function() {
 	results.splice(indexAmp2, 0, {x: -ampx + step * 3 / 10, y: f(-ampx + step * 3 / 10)});
 	// end of add
 	for(var i = 0; i < results.length; i++) {
-		results[i].x += width / 2;
+		results[i].x += width / 2 - imgSize / 2;
 		results[i].y += height / 2;
-		results[i].y = height - results[i].y;
+		results[i].y = height - results[i].y - imgSize / 2;
 	}
 	return results;
 } 
@@ -81,7 +87,7 @@ var privateRecursion = function(results, index) {
 		setTimeout(function() {
 			privateRecursion(results, index + 1);
 		}, nextTime);
-	}
+	} else setTimeout(drawHeartOver, nextTime);
 }
 var animateAppend = function(results) {
 	privateRecursion(results, 0);
@@ -89,6 +95,31 @@ var animateAppend = function(results) {
 
 var arr = generateDrawArray();
 animateAppend(arr);
+
+var div;
+function drawHeartOver() {
+	var divHeight = ampx / 1.6;
+	var divWidth = parseInt(divHeight / 0.618);
+	var padding = 15;
+	var divString = '<div style="color: white; background-color: black; opacity: 0.8; width: '+0+'px; height: '+0+'px; position: absolute; \
+					margin-buttom: 0px; margin-right: 0px; border-radius: 5px; font-size: 30px; padding: '+padding+'px; \
+					margin-left: '+(width / 2 - divWidth / 2)+'px; margin-top: '+(height / 2.7 - divHeight / 2)+'px; "></div>';
+	div = $(divString);
+	body.append(div);
+	div.animate({width: divWidth - padding * 2, height: divHeight - padding * 2}, 'slow', drawAreaOver);
+}
+
+var string1 = 'First sentence. <br> <span class="bgGreen">// next line </span><br> start abcdef';
+var string2 = 'over';
+
+function drawAreaOver(){
+	console.log("type");
+	div.typed({
+		strings: [string1, string2],
+		typeSpeed: 0
+	});
+}
+
 </script>
 
 
