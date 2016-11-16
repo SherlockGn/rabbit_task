@@ -2,6 +2,7 @@
 <head>
 	<script src="jquery.min.js"></script>
 	<script src="typed.js"></script>
+	<link href="font-awesome.min.css" rel="stylesheet">
 <style>
 	.bgGreen {
 		color: green;
@@ -95,6 +96,8 @@ var animateAppend = function(results) {
 
 var imgArray = [];
 function preload(imgs) {
+	var waitingDiv = $('<div style="margin-top: 100px; text-align: center; font-size: 100px;"><i class="fa fa-spin fa-pulse fa-spinner"></i></div>');
+	body.append(waitingDiv);
 	var count = 0;
 	for(var i = 0; i < imgs.length; i++) {
 		var url = imgs[i];
@@ -106,6 +109,7 @@ function preload(imgs) {
 			console.log('loaded: ' + url);
 			if(++count >= imgs.length) {
 				// main run
+				waitingDiv.remove();
 				console.log('run');
 				body.attr('style', 'background: url("bg.jpg");');
 				var arr = generateDrawArray();
@@ -124,7 +128,7 @@ function drawHeartOver() {
 	var divHeight = ampx / 1.6;
 	var divWidth = parseInt(divHeight / 0.618);
 	var padding = 15;
-	var divString = '<div style="color: white; background-color: black; opacity: 0.8; width: '+0+'px; height: '+0+'px; position: absolute; \
+	var divString = '<div style="color: black; background-color: pink; opacity: 0.8; width: '+0+'px; height: '+0+'px; position: absolute; \
 					margin-buttom: 0px; margin-right: 0px; border-radius: 5px; font-size: 30px; padding: '+padding+'px; \
 					margin-left: '+(width / 2 - divWidth / 2)+'px; margin-top: '+(height / 2.7 - divHeight / 2)+'px; "></div>';
 	div = $(divString);
@@ -132,14 +136,15 @@ function drawHeartOver() {
 	div.animate({width: divWidth - padding * 2, height: divHeight - padding * 2}, 'slow', drawAreaOver);
 }
 
-var string1 = 'First sentence. <br> <span class="bgGreen">// next line </span><br> start abcdef';
-var string2 = 'over';
+var string1 = 'First sentence. <br> ^1000 <span class="bgGreen">// next line </span><br> ^1000 start abcdef ^2000';
+var string2 = '我是小马哥啊！';
 
 function drawAreaOver(){
 	console.log("type");
 	div.typed({
 		strings: [string1, string2],
-		typeSpeed: 0
+		typeSpeed: 10,
+		showCursor: false
 	});
 }
 
