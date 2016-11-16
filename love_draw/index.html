@@ -9,7 +9,7 @@
 
 </style>
 </head>
-<body style="background: url(bg.jpg);">
+<body>
 </body>
 </html>
 
@@ -93,8 +93,31 @@ var animateAppend = function(results) {
 	privateRecursion(results, 0);
 }
 
-var arr = generateDrawArray();
-animateAppend(arr);
+var imgArray = [];
+function preload(imgs) {
+	var count = 0;
+	for(var i = 0; i < imgs.length; i++) {
+		var url = imgs[i];
+		var img = new Image();
+		imgArray.push(img);
+		img.src = url;
+		console.log('preloaded: ' + url);
+		img.onload = function() {
+			console.log('loaded: ' + url);
+			if(++count >= imgs.length) {
+				// main run
+				console.log('run');
+				body.attr('style', 'background: url("bg.jpg");');
+				var arr = generateDrawArray();
+				animateAppend(arr);
+			}
+		}
+	}
+}
+
+$(document).ready(function() {
+	preload(['bg.jpg', 'f1.png', 'f2.png', 'f3.png', 'f4.png', 'f5.png', 'f6.png', 'f7.png']);
+});
 
 var div;
 function drawHeartOver() {
