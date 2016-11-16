@@ -1,11 +1,15 @@
 <html>
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<script src="jquery.min.js"></script>
 	<script src="typed.js"></script>
 	<link href="font-awesome.min.css" rel="stylesheet">
 <style>
 	.bgGreen {
 		color: green;
+	}
+	.bgRed {
+		color: red;
 	}
 
 </style>
@@ -14,6 +18,7 @@
 </body>
 </html>
 
+<script src="decorations.js"></script>
 <script>
 
 var ampx = 300, ampy = 200, step = 20;
@@ -112,6 +117,7 @@ function preload(imgs) {
 				waitingDiv.remove();
 				console.log('run');
 				body.attr('style', 'background: url("bg.jpg");');
+				insertDecorations();
 				var arr = generateDrawArray();
 				animateAppend(arr);
 			}
@@ -129,20 +135,21 @@ function drawHeartOver() {
 	var divWidth = parseInt(divHeight / 0.618);
 	var padding = 15;
 	var divString = '<div style="color: black; background-color: pink; opacity: 0.8; width: '+0+'px; height: '+0+'px; position: absolute; \
-					margin-buttom: 0px; margin-right: 0px; border-radius: 5px; font-size: 30px; padding: '+padding+'px; \
+					margin-buttom: 0px; margin-right: 0px; border-radius: 5px; font-size: 20px; padding: '+padding+'px; \
 					margin-left: '+(width / 2 - divWidth / 2)+'px; margin-top: '+(height / 2.7 - divHeight / 2)+'px; "></div>';
 	div = $(divString);
 	body.append(div);
 	div.animate({width: divWidth - padding * 2, height: divHeight - padding * 2}, 'slow', drawAreaOver);
 }
 
-var string1 = 'First sentence. <br> ^1000 <span class="bgGreen">// next line </span><br> ^1000 start abcdef ^2000';
-var string2 = '我是小马哥啊！';
+var string1 = 'for (int myLove = 0; myLove &lt; forever; myLove++) <br> ^1000 System.out.println("I love u."); <br> ^1000 <span class="bgGreen">// This is the love I want to show</span>';
+var string2 = '<span class="bgRed">compile error</span>: forever undefined...'
+var string3 = '椹彲鐚笂鐨勭绂弤';
 
 function drawAreaOver(){
 	console.log("type");
 	div.typed({
-		strings: [string1, string2],
+		strings: [string1, string2, string3],
 		typeSpeed: 10,
 		showCursor: false
 	});
